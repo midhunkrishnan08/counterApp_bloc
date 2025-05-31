@@ -45,12 +45,17 @@ class MyHomePage extends StatelessWidget {
               BlocBuilder<CounterBloc, CounterState>(
                 builder: (context, state) {
                   int radius = state.count;
+                  Color circleColor =
+                      state.count >= 100 ? Colors.red : Colors.white;
                   return CircleAvatar(
                     radius: radius.toDouble(),
-                    backgroundColor: Colors.deepOrange,
+                    backgroundColor: circleColor,
                     child: Text(
                       '${state.count}',
-                      style: TextStyle(fontSize: radius.toDouble()),
+                      style: TextStyle(
+                        fontSize: radius.toDouble(),
+                        color: Colors.black,
+                      ),
                     ),
                   );
                 },
