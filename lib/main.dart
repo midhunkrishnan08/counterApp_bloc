@@ -38,22 +38,28 @@ class MyHomePage extends StatelessWidget {
     print('build1');
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            BlocBuilder<CounterBloc, CounterState>(
-              builder: (context, state) {
-                return Text(
-                  '${state.count}',
-                  style: TextStyle(fontSize: 100.0),
-                );
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              BlocBuilder<CounterBloc, CounterState>(
+                builder: (context, state) {
+                  int radius = state.count;
+                  return CircleAvatar(
+                    radius: radius.toDouble(),
+                    backgroundColor: Colors.deepOrange,
+                    child: Text(
+                      '${state.count}',
+                      style: TextStyle(fontSize: radius.toDouble()),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Column(
-        spacing: 5.0,
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           FloatingActionButton(
@@ -64,6 +70,7 @@ class MyHomePage extends StatelessWidget {
             tooltip: 'Increment',
             child: const Icon(Icons.add),
           ),
+          SizedBox(height: 2),
           FloatingActionButton(
             onPressed: () {
               context.read<CounterBloc>().add(Decrement());
